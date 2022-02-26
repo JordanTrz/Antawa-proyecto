@@ -1,0 +1,59 @@
+@import './reset';
+// Components
+@import '../components/header/header';
+// @import '../components/main/banner';
+// @import '../components/main/formulario';
+@import '../components/landingComponents/banner';
+@import '../components/landingComponents/formulario';
+@import '../pages/detalle-auto/detalle-auto';
+@import '../components/loginRegisterBox/boxLogReg';
+@import '../components/loginRegisterBox/buttonLogin';
+@import '../components/loginRegisterBox/formLogin';
+@import '../components/loginRegisterBox/formRegister';
+@import '../components/loginRegisterBox/rightRegister';
+@import '../components/carRegister/carRegister';
+@import '../components/carRegister/firstPublish';
+@import '../components/carRegister/userContact';
+
+
+// Pages
+@import '../pages/login/login';
+@import '../pages/registerUser/registerUser';
+@import '../pages/usados/usados';
+@import '../pages/buscar-auto/buscar-auto';
+@import '../pages/publicar-auto/publicar-auto';
+@import '../pages/autos-publicados/autos-publicados';
+
+body{
+  // font-family: 'Raleway';
+  font-family: 'Roboto', sans-serif;
+}
+
+main{
+    box-sizing: border-box;
+    padding: 80px 50px 50px 80px;
+    height: calc(100vh - 70px);
+    background: linear-gradient(63.29deg, rgba(38, 70, 83, 0.37) 0%, rgba(233, 196, 106, 0.6) 100.34%, rgba(255, 255, 255, 0) 100.35%);
+}
+
+
+/*Responsive para pantalla moviles*/
+@media (min-width:200px) and (max-width:900px) {
+    main{
+        padding: 35px 20px 20px 20px;
+    }
+}
+
+/*Responsive para pantalla mediana*/
+@media (min-width:901px) and (max-width:1024px) {
+    main{
+        padding: 80px 100px 70px 100px;
+    }
+}
+
+/*Responsive para pantalla maxima*/
+@media (min-width:1024px) and (max-width:1980px) {
+    main{
+        // padding: 80px 100px 70px 100px;
+    }
+}
