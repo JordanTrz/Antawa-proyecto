@@ -3,33 +3,21 @@ import React, { Fragment, useState, useEffect } from "react";
 const Formulario = (props) => {
   const { marcas, onSubmit = () => {} } = props;
   const [form, setForm] = useState({
-    search: "",
     brand: "",
-    model: "",
-    year_from: "",
-    year_to: "",
-    price: "",
+    model: ""
   });
 
   function validateForm() {
     return (
-      !!form.search.length &&
       !!form.brand.length &&
-      !!form.model.length &&
-      !!form.year_from.length &&
-      !!form.year_to.length &&
-      !!form.price.length
+      !!form.model.length
     );
   }
 
   useEffect(() => {
     const params = new URLSearchParams();
-    params.set("search", form.search);
     params.set("brand", form.brand);
-    params.set("model", form.model);
-    params.set("year_from", form.year_from);
-    params.set("year_to", form.year_to);
-    params.set("price", form.price);
+    params.set("model", form.model)
     window.history.replaceState(
       {},
       "",
@@ -56,12 +44,12 @@ const Formulario = (props) => {
           <div className="form1__buscar">
             <input
               type="text"
-              placeholder="Buscar auto"
+              placeholder="Buscar auto =>"
               className="form1__buscar__frm-buscar"
               value={form.search}
               onChange={(e) =>
                 setForm((state) => ({ ...state, search: e.target.value }))
-              }
+              } readOnly
             />
             <select
               name="marca"
@@ -100,41 +88,9 @@ const Formulario = (props) => {
           </div>
 
           <div className="form1__periodo">
-            <label htmlFor="anio">Año</label>
-            <input
-              className="form1__periodo__num"
-              type="date"
-              placeholder="Desde"
-              onChange={(e) => {
-                setForm((state) => ({ ...state, year_from: e.target.value }));
-              }}
-            />
-            <input
-              className="form1__periodo__num"
-              type="date"
-              placeholder="Hasta"
-              onChange={(e) => {
-                setForm((state) => ({ ...state, year_to: e.target.value }));
-              }}
-            />
-
-            <label htmlFor="rango" className="form1__periodo__espacio">
-              Rango de precio S/.
-            </label>
-            <input
-              type="range"
-              name="rango"
-              id="rango"
-              min="10000"
-              max="500000"
-              step="5000"
-              onChange={(e) => {
-                setForm((state) => ({ ...state, price: e.target.value }));
-              }}
-            />
-
             <button disabled={!validateForm()}>BUSCAR</button>
           </div>
+
         </form>
       </div>
     </Fragment>

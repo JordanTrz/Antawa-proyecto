@@ -1,47 +1,47 @@
 .banner img{
-    width: 300px;
-    height: 200px;
+  width: 300px;
+  height: 200px;
 }
 
 .banner{
-    display: flex;
-    padding-bottom: 60px;
-    justify-content: center;
-    margin: auto;
-    z-index: 1;
+  display: flex;
+  padding-bottom: 60px;
+  justify-content: center;
+  margin: auto;
+  z-index: 1;
 
-    &__slogan{
-        font-size: 60px;
-        font-weight: 700;
-        text-align: center;
-        color: #264653;
-    }
+  &__slogan{
+      font-size: 60px;
+      font-weight: 700;
+      text-align: center;
+      color: #264653;
+  }
 }
 
 .banner__slogan__div{
-  width: 600px;
-  // width: 50%;
-  margin: 0 50px;
+width: 600px;
+// width: 50%;
+margin: 0 50px;
 }
 
 /*Responsive para pantalla moviles*/
 @media (min-width:200px) and (max-width:720px) {
-    .banner img{
-        width: 150px;
-        height: 100px;
-    }
+  .banner img{
+      width: 150px;
+      height: 100px;
+  }
 
-    .banner{
-        display: block;
-        padding-bottom: 60px;
-        margin: auto;
-        text-align: center;
+  .banner{
+      display: block;
+      padding-bottom: 60px;
+      margin: auto;
+      text-align: center;
 
-        &__slogan{
-            font-size: 30px;
-            font-weight: bold;
-            text-align: center;
-            color: #264653;
-        }
-    }
+      &__slogan{
+          font-size: 30px;
+          font-weight: bold;
+          text-align: center;
+          color: #264653;
+      }
+  }
 }

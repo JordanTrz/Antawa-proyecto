@@ -206,11 +206,13 @@ a {
   .form1__filtro input {
     padding: 10px;
     border-radius: 7px;
-    border: none; }
+    border: none;
+    outline: none; }
   .form1__filtro select {
     padding: 10px;
     border-radius: 7px;
-    border: none; }
+    border: none;
+    outline: none; }
   .form1__filtro button {
     background-color: #264653;
     width: 150px;
@@ -234,17 +236,6 @@ a {
       grid-template-columns: repeat(1, 1fr); }
       .form1__buscar__frm-buscar {
         grid-column-end: 1; }
-    .form1__periodo {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      gap: 20px;
-      justify-content: center;
-      padding-bottom: 20px;
-      align-items: center; }
-      .form1__periodo__num {
-        width: 93%; }
-      .form1__periodo__espacio {
-        grid-column-start: 1; }
     .form1__filtro button {
       grid-column-start: 1;
       grid-column-end: 2; } }
@@ -255,35 +246,40 @@ a {
     margin-left: 20px;
     margin-right: 20px; }
     .form1__buscar {
-      grid-template-columns: repeat(3, 1fr); }
+      grid-template-columns: repeat(2, 1fr); }
       .form1__buscar__frm-buscar {
-        grid-column-start: 1;
-        grid-column-end: 1; }
-    .form1__periodo {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      justify-content: center;
-      padding-bottom: 20px;
-      align-items: center; }
-      .form1__periodo__num {
-        width: 80%; }
-      .form1__periodo__espacio {
-        grid-column-start: 1; }
+        grid-column-end: 2;
+        grid-column-end: 3; }
     .form1__filtro button {
-      grid-column-start: 2; } }
+      grid-column-start: 5;
+      grid-column-end: 4; } }
 
 /*Responsive para pantalla grande*/
-@media (min-width: 721px) and (max-width: 900px) {
+@media (min-width: 721px) and (max-width: 1199px) {
   .form1 {
     margin-left: 50px;
-    margin-right: 50px; } }
+    margin-right: 50px; }
+    .form1__buscar {
+      grid-template-columns: repeat(2, 1fr); }
+      .form1__buscar__frm-buscar {
+        grid-column-end: 2;
+        grid-column-end: 3; }
+    .form1__filtro button {
+      grid-column-start: 5;
+      grid-column-end: 4; } }
 
 /*Responsive para pantalla extra*/
 @media (min-width: 1200px) and (max-width: 2000px) {
   .form1 {
     margin-left: 150px;
-    margin-right: 150px; } }
+    margin-right: 150px; }
+    .form1__buscar {
+      grid-template-columns: repeat(3, 1fr); }
+      .form1__buscar__frm-buscar {
+        grid-column-end: 2; }
+    .form1__filtro button {
+      grid-column-start: 5;
+      grid-column-end: 4; } }
 
 .det-main {
   padding-top: 20px;
@@ -619,9 +615,14 @@ form {
   .carRegister__Inputs select, .carRegister__Inputs input {
     height: 35px;
     border-radius: 5px;
-    border: transparent; }
-  .carRegister__Inputs select {
-    width: 254px; }
+    width: 254px;
+    border: transparent;
+    outline: none; }
+  .carRegister__Inputs textarea {
+    outline: none;
+    border: transparent;
+    border-radius: 5px;
+    padding: 10px; }
 
 .inputDatoDescription {
   font-size: 14px;

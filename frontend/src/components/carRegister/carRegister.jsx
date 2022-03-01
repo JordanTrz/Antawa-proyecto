@@ -40,7 +40,7 @@ const CarRegister = () => {
     transmission: '',
     region: '',
   });
-  const [toBack,setToBack] = useState({})
+  const [toBack, setToBack] = useState({});
 
   useEffect(() => {
     const getCarData = async () => {
@@ -65,7 +65,7 @@ const CarRegister = () => {
     setNewDataForm({ ...newDataForm, [name]: value });
   };
 
-  const toEnglish = () =>{
+  const toEnglish = () => {
     const toBack = {
       user_id: parseInt(userData.id),
       model_id: parseInt(newDataForm.modelo),
@@ -82,14 +82,14 @@ const CarRegister = () => {
       fuel_id: parseInt(newDataForm.combustible),
       region_id: parseInt(newDataForm.region),
       salePost_description: newDataForm.descripcion,
-      photos:[
+      photos: [
         {
-        photo_url: newDataForm.photos
-        }
+          photo_url: newDataForm.photos,
+        },
       ],
-    }
-    setToBack(toBack)
-  }
+    };
+    setToBack(toBack);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -99,19 +99,17 @@ const CarRegister = () => {
   };
 
   useEffect(() => {
-    if(Object.keys(formErrors).length === 0 && isSubmit){
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
       // axios
-      console.log(toBack)
-      api
-        .post("/salepost",toBack)
-        .then(() => {
-          setTimeout(() => {
-            swal("Guardado", "Registro Exitoso", "success");
-            history.push('/autos-publicados');
-          }, 500);
-        } )
+      console.log(toBack);
+      api.post('/salepost', toBack).then(() => {
+        setTimeout(() => {
+          swal('Guardado', 'Registro Exitoso', 'success');
+          history.push('/autos-publicados');
+        }, 500);
+      });
     }
-  },[formErrors])
+  }, [formErrors]);
 
   const validate = (values) => {
     const errors = {};
@@ -181,16 +179,17 @@ const CarRegister = () => {
                 id="marca"
               >
                 <option> Marcas </option>
-                {allBackData.make && allBackData.make.map((marcaCarros) => {
-                  return (
-                    <option
-                      value={marcaCarros.make_id}
-                      key={marcaCarros.make_id}
-                    >
-                      {marcaCarros.make_type}
-                    </option>
-                  );
-                })}
+                {allBackData.make &&
+                  allBackData.make.map((marcaCarros) => {
+                    return (
+                      <option
+                        value={marcaCarros.make_id}
+                        key={marcaCarros.make_id}
+                      >
+                        {marcaCarros.make_type}
+                      </option>
+                    );
+                  })}
               </select>
               <p>{formErrors.marca}</p>
             </div>
@@ -201,14 +200,13 @@ const CarRegister = () => {
                 onChange={handleChange}
                 name="modelo"
                 id="modelo"
-
               >
                 <option>Modelos</option>
                 {allBackData.make &&
                   allBackData.make
                     .filter((models) => models.make_id == newDataForm.marca)
                     .map((model) => {
-                      return model.make_models.map(one_model => (
+                      return model.make_models.map((one_model) => (
                         <option
                           key={one_model.model_id}
                           value={one_model.model_id}
@@ -216,106 +214,206 @@ const CarRegister = () => {
                           {one_model.model_type}
                         </option>
                       ));
-                    })
-                }
+                    })}
               </select>
               <p>{formErrors.modelo}</p>
             </div>
 
             <div className="FormRegister__divHigh">
-              <select value={newDataForm.categoria} onChange={handleChange} name="categoria" id="categoria" >
+              <select
+                value={newDataForm.categoria}
+                onChange={handleChange}
+                name="categoria"
+                id="categoria"
+              >
                 <option>Categorías</option>
                 {allBackData.category &&
-                allBackData.category.map((categorias) =>{
-                  return(
-                  <option value={categorias.category_id} key={categorias.category_id}>{categorias.category_type}</option>
-                  )
-                })
-                }
+                  allBackData.category.map((categorias) => {
+                    return (
+                      <option
+                        value={categorias.category_id}
+                        key={categorias.category_id}
+                      >
+                        {categorias.category_type}
+                      </option>
+                    );
+                  })}
               </select>
               <p>{formErrors.categoria}</p>
             </div>
 
             <div className="FormRegister__divHigh">
-              <input value={newDataForm.añomfabricacion} onChange={handleChange} name="añomfabricacion" id="añomfabricacion" type="number" placeholder="Año de fabricación" />
+              <input
+                value={newDataForm.añomfabricacion}
+                onChange={handleChange}
+                name="añomfabricacion"
+                id="añomfabricacion"
+                type="number"
+                placeholder="Año de fabricación"
+              />
               <p>{formErrors.añomfabricacion}</p>
             </div>
             <div className="FormRegister__divHigh">
-              <input value={newDataForm.añomodelo} onChange={handleChange} name="añomodelo" id="añomodelo" type="number" placeholder="Año de modelo" />
+              <input
+                value={newDataForm.añomodelo}
+                onChange={handleChange}
+                name="añomodelo"
+                id="añomodelo"
+                type="number"
+                placeholder="Año de modelo"
+              />
               <p>{formErrors.añomodelo}</p>
             </div>
             <div className="FormRegister__divHigh">
-              <input value={newDataForm.kilometraje} onChange={handleChange} name="kilometraje" id="kilometraje" type="number" placeholder="kilometraje" />
+              <input
+                value={newDataForm.kilometraje}
+                onChange={handleChange}
+                name="kilometraje"
+                id="kilometraje"
+                type="number"
+                placeholder="kilometraje"
+              />
               <p>{formErrors.kilometraje}</p>
             </div>
 
             <div className="FormRegister__divHigh">
-              <select value={newDataForm.transmision} onChange={handleChange} name="transmision" id="transmision" >
+              <select
+                value={newDataForm.transmision}
+                onChange={handleChange}
+                name="transmision"
+                id="transmision"
+              >
                 <option>Transmisiones</option>
                 {allBackData.transmission &&
-                allBackData.transmission.map((transmisiones) =>{
-                  return(
-                  <option value={transmisiones.transmission_id} key={transmisiones.transmission_id}>{transmisiones.transmission_type}</option>
-                  )
-                })
-                }
+                  allBackData.transmission.map((transmisiones) => {
+                    return (
+                      <option
+                        value={transmisiones.transmission_id}
+                        key={transmisiones.transmission_id}
+                      >
+                        {transmisiones.transmission_type}
+                      </option>
+                    );
+                  })}
               </select>
               <p>{formErrors.transmision}</p>
             </div>
 
             <div className="FormRegister__divHigh">
-              <select value={newDataForm.combustible} onChange={handleChange} name="combustible" id="combustible" >
+              <select
+                value={newDataForm.combustible}
+                onChange={handleChange}
+                name="combustible"
+                id="combustible"
+              >
                 <option>Combustibles</option>
                 {allBackData.fuel &&
-                allBackData.fuel.map((combustibles) =>{
-                  return(
-                  <option value={combustibles.fuel_id} key={combustibles.fuel_id}>{combustibles.fuel_type}</option>
-                  )
-                })
-                }
+                  allBackData.fuel.map((combustibles) => {
+                    return (
+                      <option
+                        value={combustibles.fuel_id}
+                        key={combustibles.fuel_id}
+                      >
+                        {combustibles.fuel_type}
+                      </option>
+                    );
+                  })}
               </select>
               <p>{formErrors.combustible}</p>
             </div>
 
             <div className="FormRegister__divHigh">
-              <input value={newDataForm.cilindrada} onChange={handleChange} name="cilindrada" id="cilindrada" type="text" placeholder="Cilindrada" />
+              <input
+                value={newDataForm.cilindrada}
+                onChange={handleChange}
+                name="cilindrada"
+                id="cilindrada"
+                type="text"
+                placeholder="Cilindrada"
+              />
               <p>{formErrors.cilindrada}</p>
             </div>
             <div className="FormRegister__divHigh">
-              <select value={newDataForm.numeropuertas} onChange={handleChange} name="numeropuertas" id="numeropuertas" >
+              <select
+                value={newDataForm.numeropuertas}
+                onChange={handleChange}
+                name="numeropuertas"
+                id="numeropuertas"
+              >
                 <option>Número de puertas</option>
-                <option>3</option>
                 <option>4</option>
+                <option>5</option>
               </select>
               <p>{formErrors.numeropuertas}</p>
             </div>
             <div className="FormRegister__divHigh">
-              <input value={newDataForm.color} onChange={handleChange} name="color" id="color" type="text" placeholder="Color" />
+              <input
+                value={newDataForm.color}
+                onChange={handleChange}
+                name="color"
+                id="color"
+                type="text"
+                placeholder="Color"
+              />
               <p>{formErrors.color}</p>
             </div>
             <div className="FormRegister__divHigh">
-              <input value={newDataForm.preciodolares} onChange={handleChange} name="preciodolares" id="preciodolares" type="number" placeholder="Precio en Dólares" />
+              <input
+                value={newDataForm.preciodolares}
+                onChange={handleChange}
+                name="preciodolares"
+                id="preciodolares"
+                type="number"
+                placeholder="Precio en Dólares"
+              />
               <p>{formErrors.preciodolares}</p>
             </div>
             <div className="FormRegister__divHigh">
-              <select value={newDataForm.region} onChange={handleChange} name="region" id="region" >
+              <select
+                value={newDataForm.region}
+                onChange={handleChange}
+                name="region"
+                id="region"
+              >
                 <option>Regiones</option>
                 {allBackData.region &&
-                allBackData.region.map((regiones) =>{
-                  return(
-                  <option value={regiones.region_id} key={regiones.region_id}>{regiones.region_type}</option>
-                  )
-                })
-                }
+                  allBackData.region.map((regiones) => {
+                    return (
+                      <option
+                        value={regiones.region_id}
+                        key={regiones.region_id}
+                      >
+                        {regiones.region_type}
+                      </option>
+                    );
+                  })}
               </select>
               <p>{formErrors.region}</p>
             </div>
             <div className="FormRegister__divHigh">
-              <input value={newDataForm.photos} onChange={handleChange} name="photos" id="photos" type="text" placeholder="Link de photo" />
+              <input
+                value={newDataForm.photos}
+                onChange={handleChange}
+                name="photos"
+                id="photos"
+                type="text"
+                placeholder="Link de photo"
+                autoComplete="off"
+              />
               <p>{formErrors.photos}</p>
             </div>
             <div className="gridInputPublishCar FormRegister__divHigh">
-              <textarea value={newDataForm.descripcion} onChange={handleChange} name="descripcion" id="descripcion" type="text" placeholder="Ingresa descripción" className="inputDatoDescription">Ingrese descripción</textarea>
+              <textarea
+                value={newDataForm.descripcion}
+                onChange={handleChange}
+                name="descripcion"
+                id="descripcion"
+                type="text"
+                placeholder="Ingresa descripción"
+                className="inputDatoDescription"
+              >
+                Ingrese descripción
+              </textarea>
               <p>{formErrors.descripcion}</p>
             </div>
           </div>
