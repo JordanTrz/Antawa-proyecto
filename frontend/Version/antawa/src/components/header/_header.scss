@@ -1,0 +1,95 @@
+//Header
+
+
+
+/*
+header ul a{
+    color: #fff;
+    text-decoration: none;
+    border-radius: 7px;
+    padding: 10px;
+    font-weight: bold;
+}
+header ul a:hover{
+    background-color:#E9C46A ;
+    color: #264653;
+}
+
+header ul .a_active{
+    background-color:#E9C46A ;
+    color: #264653;
+}
+
+
+header .i .user{
+    font-size: 24px;
+    color: #fff;
+    background-color: #fff;
+    padding: 5px 5px 2px 5px;
+    border-radius: 7px;
+}
+
+
+header .i .user:hover{
+    cursor: pointer;
+    background-color:#E9C46A ;
+}
+
+.header{
+    height: 40px;
+    padding: 10px 10px 10px 20px;
+    background-color:#264653;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__ul{
+        display:flex;
+        align-items: center;
+        margin-right: 10px;
+    }
+    &__li{
+        padding: 10px;
+    }
+
+    &__li ul{
+        background-color:#264653;
+        display: none;
+        position: absolute;
+        top: 60px;
+        height: 80px;
+        padding: 10px;
+        border-radius: 0px 0px 7px 7px;
+    }
+
+    &__li ul:hover{
+        display: block;
+    }
+
+
+    &__li ul li{
+        padding: 10px;
+    }
+}
+
+.isLoginName{
+    color: white;
+    font-size: 12px;
+    font-family: 'Raleway';
+    text-align: center;
+  }
+
+/*Responsive para pantalla moviles*/
+@media (min-width:200px) and (max-width:720px) {
+    .header{
+         &__ul{
+        display: none;
+         }
+    }
+}
+
+a{
+    text-decoration:none;
+  }
+
+ 

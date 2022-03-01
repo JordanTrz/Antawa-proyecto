@@ -7,36 +7,42 @@ import { useHistory } from 'react-router-dom';
 
 const CarsPublished = () => {
 
+  const history = useHistory();
   const dispatch = useDispatch();
   const userID = useSelector((state) => state.auth.userData.id)
   const [carPublished,setCarPublished] = useState([]);
 
+  const dataCarsPublished = async ()=>{
+    await api
+      .get(`/salepost/user/${userID}`)
+      .then((res) => {
+        setCarPublished(res.data.content);
+        dispatch({
+          type: 'SET_PUBLISH_CARS',
+          payload: res.data.content
+        });
+        if (res.data.content.length<1){
+        history.push('/primera-publicacion')
+        }
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+  }
+
   useEffect(()=>{
-    const dataCarsPublished = async ()=>{
-      await api
-        .get(`/salepost/user/${userID}`)
-        .then((res) => {
-          setCarPublished(res.data.content);
-          dispatch({
-            type: 'SET_PUBLISH_CARS',
-            payload: res.data.content
-          })
-        })
-        .catch((err)=>{
-          console.log(err)
-        })
-    }
     dataCarsPublished();
   },[])
 
   const handleRemoveBox = async (id) =>{
-    await api.delete(`salepost/${id.target.value}`)
+    await api.delete(`salepost/${id.target.value}`);
+    dataCarsPublished();
   }
 
   return(
     <div className="main_buscar_auto_publish">
       <div className="publishCar__wrapper">
-        {Object.keys(carPublished).length == 0 ? '' : carPublished.map((e,i)=>{
+        {carPublished && carPublished.length == 0 ? '' : carPublished.map((e,i)=>{
           return(
           <div className="publishCar__data">
             <h1>Publicación #{i+1}</h1>

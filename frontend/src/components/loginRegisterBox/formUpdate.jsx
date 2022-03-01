@@ -2,31 +2,49 @@ import { ButtonLogReg } from "./buttonLogReg";
 import { NavLink as Link } from 'react-router-dom';
 import { useState } from "react";
 import { useEffect } from "react";
-import axios from 'axios';
+import { api } from "../../api/api";
 import { useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { URL_BACKEND } from "../../api/environment";
 
 function FormUpdate(){
+
+  const dispatch = useDispatch()
 
   const FirtsInitialValues = useSelector((state) => {
     return state.auth.userData;
   })
 
   // const url = 'http://localhost:5000/vendedores';
-  console.log(FirtsInitialValues)
+  // console.log(FirtsInitialValues)
   const url = `${URL_BACKEND}/user/${FirtsInitialValues.id}`;
 
   // const pageHome = '/';
   //De esta línea solo se cambio la ñ por la n de contraseña
 
-  const initialValues = { nombre:FirtsInitialValues.nombre, apellido:FirtsInitialValues.apellido, email:FirtsInitialValues.email, contrasena:FirtsInitialValues.contrasena, dni:FirtsInitialValues.dni, celular:FirtsInitialValues.celular };
+  const initialValues = { nombre:FirtsInitialValues.nombre, apellido:FirtsInitialValues.apellido, email:FirtsInitialValues.email, contrasena:FirtsInitialValues.contraseña, dni:FirtsInitialValues.dni, celular:FirtsInitialValues.celular };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [toEnglish, setToEnglish] = useState({});
   const history = useHistory();
-  console.log(initialValues)
+
+
+  const getToBack = () =>{
+    setToEnglish({
+      id: FirtsInitialValues.id,
+      first_name: formValues.nombre,
+      last_name:formValues.apellido,
+      username: formValues.email,
+      email: formValues.email,
+      password: formValues.contrasena,
+      extentuser:{
+        extentUser_dni: formValues.dni,
+        extentUser_cellphone: formValues.celular
+      }
+    })
+  }
 
   const handleChange = (e) => {
     const {name,value} = e.target;
@@ -35,25 +53,45 @@ function FormUpdate(){
 
   const handleSubmit = (e) =>{
     e.preventDefault();
-    setFormErrors(validate(formValues));
     setIsSubmit(true);
+    getToBack();
+    setFormErrors(validate(formValues));
+    sendUpdate();
   }
 
-  useEffect(() => {
+  const handleDelete = () => {
+      api
+        .delete(`/user/${FirtsInitialValues.id}`)
+        .then(res => console.log(res))
+        .then(()=> {
+          dispatch({
+            type:'SET_USER',
+            payload: {}
+          });
+          dispatch({
+            type: 'SET_LOGIN',
+            payload: false,
+          });
+        })
+        .then(() => history.push('/register'));
+  }
+
+  // useEffect(() => {
+    // console.log(toEnglish)
+    const sendUpdate = () => {
     if(Object.keys(formErrors).length === 0 && isSubmit){
-      // axios
-      // .put(url,formValues)
-      URL_BACKEND.put(`/user/${FirtsInitialValues.id}`,formValues)
+      api
+      .put(`/user/${FirtsInitialValues.id}`,formValues)
+      // URL_BACKEND.put(`/user/${FirtsInitialValues.id}`,formValues)
       .then(() => {
         console.log("Enviado a la base de datos")
       })
       swal("Correcto", "Registro exitoso", "success");
-      // setTimeout(() => {
         history.push('/');
-      // }, 1000);
     }
+  }
 
-  },[formErrors])
+  // },[formErrors])
 
   const validate = (values) =>{
     const errors = {};
@@ -124,7 +162,7 @@ function FormUpdate(){
       <ButtonLogReg TextoBtn="Actualizar  "/>
       </div>
       <div>
-        <button className="Button__delete">Eliminar Cuenta</button>
+        <button onClick={handleDelete} className="Button__delete">Eliminar Cuenta</button>
       </div>
     </form>
   )

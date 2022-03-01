@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.contrib.auth.hashers import make_password
 from .models import *
 class ModelSerializer(serializers.ModelSerializer):
   class Meta:
@@ -87,6 +88,7 @@ class SalePostSerializer(serializers.ModelSerializer):
   #   return instance
 
 class ExtentUserSerializer(serializers.ModelSerializer):
+  # user_id = serializers.IntegerField(required=False)
   class Meta:
     model = ExtentUser
     fields = '__all__'
@@ -102,14 +104,29 @@ class UserSerializer(serializers.ModelSerializer):
 
   def create(self,validated_data):
     extent_user = validated_data.pop('extentuser')
+    password = validated_data.pop('password')
+    validated_data['password'] = make_password(password)
     user = User.objects.create(**validated_data)
     ExtentUser.objects.create(**extent_user, user_id=user)
     return user
 
-  # def update(self, instance, validated_data):
-  #   extent_user = validated_data.pop('extentuser')
-  #   instance.extentUser_dni = validated_data.get('extentUser_dni',instance.extentUser_dni)
-  #   instance.save()
-  #   keep_extent_user = []
-  #   existing_ids = [instance.user_id]
+  def update(self, instance, validated_data):
+    extent_user = validated_data.pop('extentuser')
+    instance.first_name = validated_data.get("first_name", instance.first_name)
+    instance.last_name = validated_data.get("last_name", instance.last_name)
+    instance.username = validated_data.get("username", instance.username)
+    instance.email = validated_data.get("email", instance.email)
+    instance.password = validated_data.get("password", instance.password)
+    instance.extentuser = validated_data.get("extentuser", instance.extentuser)
+    instance.save()
+    print(self)
+    ExtentUser.objects.get()
 
+    # if User.objects.filter(id=extent_user["user_id"]).exists():
+    # e = ExtentUser.objects.get(pk=validated_data["user_id"])
+    # extentUser_dni = extent_user.get('extentUser_dni', extentUser_dni)
+    # extentUser_cellphone = extent_user.get('extentUser_cellphone', extentUser_cellphone)
+    # save()
+    # print(validated_data)
+
+    return instance

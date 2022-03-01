@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 # Datos adicionales en otra tabla
 class ExtentUser(models.Model):
   # extentUser_id = models.AutoField(primary_key=True)
-  user_id = models.OneToOneField(User,primary_key=True,related_name='extentuser', to_field='id',db_column='user_id',on_delete=models.RESTRICT,verbose_name='Usuario')
+  user_id = models.OneToOneField(User,primary_key=True,related_name='extentuser', to_field='id',db_column='user_id',on_delete=models.CASCADE,verbose_name='Usuario')
   extentUser_dni = models.CharField(max_length=8,null=True,blank=True)
   extentUser_cellphone = models.CharField(max_length=9,null=True,blank=True)
   cellphone_str = str(extentUser_cellphone)
@@ -25,7 +25,7 @@ class Make(models.Model):
 class Model(models.Model):
   model_id = models.AutoField(primary_key=True)
   model_type = models.CharField(max_length=200,verbose_name='Modelo',null=True,blank=True)
-  make_id = models.ForeignKey(Make,related_name='make_models',to_field='make_id',on_delete=models.RESTRICT,db_column='make_id',verbose_name='Marca')
+  make_id = models.ForeignKey(Make,related_name='make_models',to_field='make_id',on_delete=models.CASCADE,db_column='make_id',verbose_name='Marca')
 
   def __str__(self):
     return self.model_type
@@ -92,4 +92,4 @@ class Photo(models.Model):
   photo_id = models.AutoField(primary_key=True)
   # photos_url = CloudinaryField('image',default='')
   photo_url = models.CharField(max_length=200,verbose_name='URLS de fotos',null=True,blank=True)
-  salePost_id = models.ForeignKey(SalePost,related_name='photos', to_field='salePost_id',db_column='salePost_id',on_delete=models.RESTRICT,verbose_name='Publicación')
+  salePost_id = models.ForeignKey(SalePost,related_name='photos', to_field='salePost_id',db_column='salePost_id',on_delete=models.CASCADE,verbose_name='Publicación')

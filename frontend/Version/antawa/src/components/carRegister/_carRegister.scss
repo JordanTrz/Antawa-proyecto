@@ -1,0 +1,104 @@
+.carRegister_wrapper{
+padding: 30px 0 0 0;
+width: 100%;
+// height: 100%;
+}
+.carRegister__Publish{
+  width: 60%;
+  max-width: 900px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  background: #E9C46A;
+  padding: 15px 50px;
+  border-radius: 8px;
+
+  h2{
+    padding:0 0 20px 0;
+    font-weight: bold;
+    color: #0b1f27;
+  }
+
+  button{
+    margin-top: 30px;
+    background: #264653;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: transparent;
+    padding: 15px 30px;
+    cursor: pointer;
+  }
+
+  button:hover{
+    background: #0b1f27;
+  }
+}
+
+
+.carRegister__Inputs{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 10px 80px;
+
+  select, input{
+    height: 35px;
+    border-radius: 5px;
+    width: 254px;
+    border: transparent;
+    outline: none;
+  }
+
+  textarea{
+    outline: none;
+    border: transparent;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+}
+
+.inputDatoDescription{
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.gridInputPublishCar{
+  grid-column-start: 1;
+  grid-column-end: 3;
+
+  textarea{
+    width: 590px;
+    height: 45px;
+  }
+}
+
+.FormRegister__divHigh{
+
+  p{
+    position: absolute;
+    font-size: 14px;
+    justify-content: center;
+  }
+
+}
+
+@media (max-width: 1100px) {
+  .carRegister__Inputs{
+    grid-template-columns: repeat(1,1fr);
+  }
+
+  .gridInputPublishCar{
+  grid-column-start: 1;
+  grid-column-end: 1;
+
+    textarea{
+      width: 254px;
+      height: 45px;
+    }
+  }
+}

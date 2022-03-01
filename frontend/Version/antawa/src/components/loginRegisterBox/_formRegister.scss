@@ -1,0 +1,71 @@
+.FormRegister{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 30px;
+
+  label{
+    font-size: 12px;
+    color: #264653;
+  }
+  h5{color:#264653};
+  input{
+    font-size:14px;
+    outline: none;
+  }
+
+  p{
+    font-size: 10px;
+  }
+}
+
+.FormRegister__2row{
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+
+  input{
+    width: 150px;
+    outline: none;
+  }
+}
+
+.FormRegister__1row{
+  text-align: center;
+
+  input{
+    width: 327px;
+    outline: none;
+  }
+}
+
+.FormRegister__check{
+  display: flex;
+  flex-direction: column;
+
+  label{
+    display: flex;
+    align-items: center;
+  }
+}
+
+.inputHigh{
+  input{
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid white;
+    padding-left: 8px;
+    outline: none;
+  }
+}
+
+.FormRegister__divHigh{
+  height: 45px;
+
+  p{
+    position: absolute;
+    color: #fd592f;
+  }
+}

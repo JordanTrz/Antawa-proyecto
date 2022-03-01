@@ -123,8 +123,9 @@ class SalePostDetailView(APIView):
     return Response(context)
 
   def delete(self,request,sale_id):
-    dataSalePost = SalePost.objects.delete(pk=sale_id)
+    dataSalePost = SalePost.objects.get(pk=sale_id)
     serSalePost = SalePostSerializer(dataSalePost)
+    dataSalePost.delete()
     context = {
       'ok':True,
       'content':serSalePost.data
@@ -164,9 +165,9 @@ class UserView(APIView):
   def post(self,request):
     serUser = UserSerializer(data=request.data)
     if serUser.is_valid(raise_exception=True):
-      password = serUser.validated_data.get('password')
+      # password = serUser.validated_data.get('password')
       # Revisar creación de password. Incluir en serializer
-      serUser.validated_data['password'] = make_password(password)
+      # serUser.validated_data['password'] = make_password(password)
       new_user = serUser.save()
 
       if new_user:
@@ -200,8 +201,9 @@ class UserDetailView(APIView):
     return Response(context)
 
   def delete(self,request,user_id):
-    dataUser = User.objects.delete(pk=user_id)
+    dataUser = User.objects.get(pk=user_id)
     serUser = UserSerializer(dataUser)
+    dataUser.delete()
     context = {
       'ok':True,
       'content': serUser.data

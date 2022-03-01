@@ -1,0 +1,180 @@
+//formulario -- buscador en la pagina de inicio
+.form1{
+    position: relative;
+
+    &__option{
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    &__option button{
+        background-color: #264653;
+        color: #fff;
+        padding: 10px;
+        width: 100px;
+        border-radius: 10px 10px 0 0;
+        border: none;
+        font-weight: bold;
+    }
+    &__option button:hover{
+        background-color:#E9C46A ;
+        color: #264653;
+        cursor: pointer;
+    }
+
+    &__buscar{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap: 20px;
+        padding-bottom: 20px;
+        align-items: center;
+
+        &__frm-buscar{
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+    }
+
+
+    &__periodo{
+        display: grid;
+        grid-template-columns: repeat(7,1fr);
+        gap: 20px;
+        padding-bottom: 20px;
+        align-items: center;
+
+        &__num{
+            width: 80%;
+        }
+        &__espacio{
+            grid-column-start: 5;
+        }
+    }
+
+    &__filtro{
+        background-color: #E9C46A;
+        padding: 20px 30px 20px 30px;
+        border-radius: 10px;
+    }
+
+    &__filtro input{
+        padding: 10px;
+        border-radius: 7px;
+        border:none;
+        outline: none;
+    }
+
+    &__filtro select{
+        padding: 10px;
+        border-radius: 7px;
+        border:none;
+        outline: none;
+    }
+
+    &__filtro button{
+        background-color: #264653;
+        width: 150px;
+        font-size: 16px;
+        color: #fff;
+        padding: 10px 10px 10px 10px;
+        border-radius: 10px;
+        border: none;
+        font-weight: bold;
+        width: 100%;
+    }
+    &__filtro button:hover{
+        background-color:#407388;
+        cursor: pointer;
+    }
+}
+
+/*Responsive para pantalla moviles*/
+@media (min-width:200px) and (max-width:608px) {
+    .form1{
+        margin-left: 20px;
+        margin-right: 20px;
+
+        &__buscar{
+            grid-template-columns: repeat(1,1fr);
+
+            &__frm-buscar{
+                grid-column-end: 1;
+            }
+        }
+
+        &__filtro button{
+            grid-column-start: 1;
+            grid-column-end: 2;
+        }
+    }
+
+}
+
+/*Responsive para pantalla mediana*/
+@media (min-width:609px) and (max-width:920px) {
+    .form1{
+        margin-left: 20px;
+        margin-right: 20px;
+
+        &__buscar{
+            grid-template-columns: repeat(2,1fr);
+
+            &__frm-buscar{
+                grid-column-end: 2;
+                grid-column-end: 3;
+            }
+        }
+
+        &__filtro button{
+            grid-column-start: 5;
+            grid-column-end: 4;
+        }
+    }
+}
+
+/*Responsive para pantalla grande*/
+@media (min-width:721px) and (max-width:1199px) {
+    .form1{
+        margin-left: 50px;
+        margin-right: 50px;
+        &__buscar{
+            grid-template-columns: repeat(2,1fr);
+
+            &__frm-buscar{
+                grid-column-end: 2;
+                grid-column-end: 3;
+            }
+        }
+
+        &__filtro button{
+            grid-column-start: 5;
+            grid-column-end: 4;
+        }
+
+    }
+}
+
+/*Responsive para pantalla extra*/
+@media (min-width:1200px) and (max-width:2000px) {
+    .form1{
+        margin-left: 150px;
+        margin-right: 150px;
+        &__buscar{
+            grid-template-columns: repeat(3,1fr);
+
+            &__frm-buscar{
+                grid-column-end: 2;
+            }
+        }
+
+        &__filtro button{
+            grid-column-start: 5;
+            grid-column-end: 4;
+        }
+    }
+}
+
+
+
+
