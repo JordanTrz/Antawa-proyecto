@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { URL_BACKEND } from '../../api/environment';
 
 function FormUpdate() {
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const FirtsInitialValues = useSelector((state) => {
     return state.auth.userData;
   });
@@ -53,28 +53,57 @@ function FormUpdate() {
     setFormValues({ ...formValues, [name]: value });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmit(true);
+    getToBack();
+    setFormErrors(validate(formValues));
+    // sendUpdate();
+  };
 
+  const handleDelete = () => {
+    api
+      .delete(`/user/${FirtsInitialValues.id}`)
+      // .then((res) => console.log(res))
+      .then(() => {
+        dispatch({
+          type: 'SET_USER',
+          payload: {},
+        });
+        dispatch({
+          type: 'SET_LOGIN',
+          payload: false,
+        });
+      })
+      .then(() => history.push('/register'));
+  };
 
   useEffect(() => {
-  // console.log(toEnglish)
+  if (Object.keys(formErrors).length === 0 && isSubmit) {
     const sendUpdate = () => {
-      if (Object.keys(formErrors).length === 0 && isSubmit) {
-        api
-          .put(`/user/${FirtsInitialValues.id}`, toEnglish)
-          // URL_BACKEND.put(`/user/${FirtsInitialValues.id}`,formValues)
-          .then((res) => {
-            console.log('Enviado a la base de datos');
-            console.log(res);
-            // dispatch({
-            //   type:'SET_USER',
-            //   payload:
-            // })
-          });
-        swal('Correcto', 'Registro exitoso', 'success');
-        history.push('/');
-      }
-      sendUpdate()
+      api
+        .put(`/user/${FirtsInitialValues.id}`, toEnglish)
+        // URL_BACKEND.put(`/user/${FirtsInitialValues.id}`,formValues)
+        .then((res) => {
+          console.log('Enviado a la base de datos');
+          dispatch({
+            type:'SET_USER',
+            payload:{
+              nombre: res.data.content.first_name,
+              apellido: res.data.content.last_name,
+              email: res.data.content.email,
+              contraseña: res.data.content.password ,
+              id: res.data.content.id,
+              dni: res.data.content.extentuser.extentUser_dni,
+              celular: res.data.content.extentuser.extentUser_cellphone
+            }
+          })
+        });
+      swal('Correcto', 'Registro exitoso', 'success');
+      history.push('/');
     }
+    sendUpdate();
+    };
   },[formErrors])
 
   const validate = (values) => {
@@ -112,33 +141,6 @@ function FormUpdate() {
 
     return errors;
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmit(true);
-    getToBack();
-    setFormErrors(validate(formValues));
-    // sendUpdate();
-  };
-
-  const handleDelete = () => {
-    api
-      .delete(`/user/${FirtsInitialValues.id}`)
-      // .then((res) => console.log(res))
-      .then(() => {
-        dispatch({
-          type: 'SET_USER',
-          payload: {},
-        });
-        dispatch({
-          type: 'SET_LOGIN',
-          payload: false,
-        });
-      })
-      .then(() => history.push('/register'));
-  };
-
-  console.log()
 
   return (
     <form className="FormRegister" onSubmit={handleSubmit}>

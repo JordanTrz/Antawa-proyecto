@@ -22,7 +22,6 @@ function FormLogin(){
     await URL_BACKEND
       .get(`/user/${payloadJSON.user_id}`)
       .then((response) => {
-        console.log(response.data.content.extentuser.extentUser_dni)
         saveUserLocal(response.data.content)
       });
     await api

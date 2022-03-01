@@ -62,6 +62,32 @@ class SalePostSerializer(serializers.ModelSerializer):
     return salepost
 
   # def update(self,instance,validated_data):
+  #   instance.salePost_description = validated_data('salePost_description', instance.salePost_description)
+  #   instance.salePost_yearModel = validated_data('salePost_yearModel', instance.salePost_yearModel)
+  #   instance.salePost_yearManufacturing = validated_data('salePost_yearManufacturing', instance.salePost_yearManufacturing)
+  #   instance.salePost_kilometer = validated_data('salePost_kilometer', instance.salePost_kilometer)
+  #   instance.salePost_cylinder = validated_data('salePost_cylinder', instance.salePost_cylinder)
+  #   instance.salePost_door = validated_data('salePost_door', instance.salePost_door)
+  #   instance.salePost_color = validated_data('salePost_color', instance.salePost_color)
+  #   instance.salePost_price = validated_data('salePost_price', instance.salePost_price)
+  #   new_model = Model.objects.get()
+  #   n_model = validated_data.pop('model')
+  #   n_make = validated_data.pop('model')
+  #   n_transmission = validated_data.pop('model')
+  #   n_fuel = validated_data.pop('model')
+  #   n_region = validated_data.pop('model')
+
+
+  #   instance.model_type = validated_data('model_type', instance.model_type)
+  #   instance.make_type = validated_data('make_type', instance.make_type)
+  #   instance.category_type = validated_data('category_type', instance.category_type)
+  #   instance.transmission_type = validated_data('transmission_type', instance.transmission_type)
+  #   instance.fuel_type = validated_data('fuel_type', instance.fuel_type)
+  #   instance.region_type = validated_data('region_type', instance.region_type)
+
+
+
+  # def update(self,instance,validated_data):
   #   photos = validated_data.pop('photos')
   #   # salepost = SalePost.objects.create(**validated_data)
   #   instance.salePost_color = validated_data.get("salePost_color",instance.salePost_color)
