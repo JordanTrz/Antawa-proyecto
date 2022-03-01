@@ -111,22 +111,20 @@ class UserSerializer(serializers.ModelSerializer):
     return user
 
   def update(self, instance, validated_data):
+    print(instance.id)
     extent_user = validated_data.pop('extentuser')
     instance.first_name = validated_data.get("first_name", instance.first_name)
     instance.last_name = validated_data.get("last_name", instance.last_name)
     instance.username = validated_data.get("username", instance.username)
     instance.email = validated_data.get("email", instance.email)
+    password = validated_data.pop('password')
+    validated_data['password'] = make_password(password)
     instance.password = validated_data.get("password", instance.password)
     instance.extentuser = validated_data.get("extentuser", instance.extentuser)
     instance.save()
-    print(self)
-    ExtentUser.objects.get()
+    new_extentuser = ExtentUser.objects.get(pk=instance.id)
+    new_extentuser.extentUser_dni = extent_user.get('extentUser_dni',new_extentuser.extentUser_dni)
+    new_extentuser.extentUser_cellphone = extent_user.get('extentUser_cellphone',new_extentuser.extentUser_cellphone)
 
-    # if User.objects.filter(id=extent_user["user_id"]).exists():
-    # e = ExtentUser.objects.get(pk=validated_data["user_id"])
-    # extentUser_dni = extent_user.get('extentUser_dni', extentUser_dni)
-    # extentUser_cellphone = extent_user.get('extentUser_cellphone', extentUser_cellphone)
-    # save()
-    # print(validated_data)
-
+    new_extentuser.save()
     return instance

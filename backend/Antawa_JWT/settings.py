@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 
-import cloudinary
+# import cloudinary
 
 from decouple import config
 
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'rest_framework_simplejwt',
-    'cloudinary',
+    # 'cloudinary',
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -180,11 +180,11 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-cloudinary.config(
-    cloud_name = config('CLOUDINARY_CLOUD_NAME'),
-    api_key = config('CLOUDINARY_API_KEY'),
-    api_secret = config('CLOUDINARY_API_SECRET')
-)
+# cloudinary.config(
+#     cloud_name = config('CLOUDINARY_CLOUD_NAME'),
+#     api_key = config('CLOUDINARY_API_KEY'),
+#     api_secret = config('CLOUDINARY_API_SECRET')
+# )
 
 CORS_ALLOW_ALL_ORIGINS = True
 
