@@ -51,10 +51,11 @@ function Car(props) {
         }</div>
 
         <div className="container__card__precio">
-          <div>
+          {/* <div>
             <box-icon type="solid" name="no-entry" color="white"></box-icon>
-          </div>
-          <div className="container__card__precio__precio1">$ 1,200</div> |
+          </div> */}
+          {/* <div className="container__card__precio__precio1">$ 1,200</div> | */}
+          <h3>Precio</h3>
           <h3 className="container__card__precio__precio2">
             $ {salePost_price}
           </h3>

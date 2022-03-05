@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import swal from 'sweetalert';
 
+import AddBoxIcon from '@mui/icons-material/AddBox';
+
 const CarRegister = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -391,6 +393,8 @@ const CarRegister = () => {
               <p>{formErrors.region}</p>
             </div>
             <div className="FormRegister__divHigh">
+              <label><i className='fa fa-plus'></i></label>
+              {/* <AddBoxIcon/> */}
               <input
                 value={newDataForm.photos}
                 onChange={handleChange}
