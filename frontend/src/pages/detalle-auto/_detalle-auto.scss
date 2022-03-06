@@ -1,7 +1,8 @@
 .det-main{
   padding-top:20px;
   font-weight: bold;
-  height: 87vh ;
+  height: calc(100vh - 70px) ;
+  box-sizing: border-box;
   background: linear-gradient(63.29deg, rgba(38, 70, 83, 0.37) 0%, rgba(233, 196, 106, 0.6) 100.34%, rgba(255, 255, 255, 0) 100.35%);
 }
 

@@ -30,7 +30,7 @@ const DetAuto = (props) => {
     slidesToScroll: 1,
   };
 
-  console.log(oferta.salePost_description);
+  console.log(oferta.photos)
 
   return (
     <div>
@@ -45,7 +45,7 @@ const DetAuto = (props) => {
                       oferta.photos.map((photo) => {
                         return (
                           <div className="div1_slider__imagen">
-                            <img src={photo.photo_url} alt="1" />
+                            <img src={photo.photo_url ? photo.photo_url : `https://res.cloudinary.com/dlhsturyl/${photo.photo_cloudinary}`} alt="1" />
                           </div>
                         );
                       })}

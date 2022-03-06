@@ -90,6 +90,6 @@ class SalePost(models.Model):
 # Photos
 class Photo(models.Model):
   photo_id = models.AutoField(primary_key=True)
-  # photos_url = CloudinaryField('image',default='')
+  photo_cloudinary = CloudinaryField('image',default='',null=True,blank=True)
   photo_url = models.CharField(max_length=200,verbose_name='URLS de fotos',null=True,blank=True)
   salePost_id = models.ForeignKey(SalePost,related_name='photos', to_field='salePost_id',db_column='salePost_id',on_delete=models.CASCADE,verbose_name='Publicación')

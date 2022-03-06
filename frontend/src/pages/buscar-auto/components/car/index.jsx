@@ -35,7 +35,7 @@ function Car(props) {
     <div className="car-component">
       <Link exact to={idcardlink}>
         <div className="container__img">
-          <img src={photos[0].photo_url} />
+          <img src={photos[0].photo_url ? photos[0].photo_url : photos[0].photo_cloudinary} />
         </div>
       </Link>
       <div className="container__card">
