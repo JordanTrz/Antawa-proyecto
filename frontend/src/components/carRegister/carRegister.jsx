@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { api } from '../../api/api';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import swal from 'sweetalert';
@@ -43,6 +44,9 @@ const CarRegister = () => {
     region: '',
   });
   const [toBack, setToBack] = useState({});
+  const [toPhoto, setToPhoto] = useState([]);
+  const [first, setFirst] = useState(false);
+  const [second, setSecond] = useState(false);
 
   useEffect(() => {
     const getCarData = async () => {
@@ -62,9 +66,14 @@ const CarRegister = () => {
     getCarData();
   }, []);
 
+  const handlePhoto = (e) =>{
+    setToPhoto(e.target.files)
+    console.log(e.target.files)
+  }
+
   const handleChange = (e) => {
-    let { name, value } = e.target;
-    setNewDataForm({ ...newDataForm, [name]: value });
+      let { name, value } = e.target;
+      setNewDataForm({ ...newDataForm, [name]: value });
   };
 
   const toEnglish = () => {
@@ -87,31 +96,51 @@ const CarRegister = () => {
       photos: [
         {
           photo_url: newDataForm.photos,
+          // photo_cloudinary: newDataForm.photos
         },
       ],
     };
     setToBack(toBack);
+    return toBack;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    toEnglish();
-    setFormErrors(validate(newDataForm));
-    setIsSubmit(true);
+    setFirst(true);
   };
 
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      // axios
-      console.log(toBack);
-      api.post('/salepost', toBack).then(() => {
-        setTimeout(() => {
-          swal('Guardado', 'Registro Exitoso', 'success');
-          history.push('/autos-publicados');
-        }, 500);
-      });
+  useEffect(()=>{
+    const formData = new FormData()
+    formData.append("file",toPhoto)
+    formData.append("upload_preset","yvlnujk1")
+
+    const sentFinal = async () => {await axios
+     .post("https://api.cloudinary.com/v1_1/dlhsturyl/image/upload",formData)
+     .then(res => {
+       console.log(res);
+       setNewDataForm({...newDataForm, "photos" :res.data.url})
+       setIsSubmit(true);
+      //  toEnglish();
+       setFormErrors(validate(newDataForm));
+       setSecond(true);
+       setIsSubmit(true);
+      })
     }
-  }, [formErrors]);
+    sentFinal();
+  },[first])
+
+  // useEffect(() => {
+  //   if (Object.keys(formErrors).length === 0 && isSubmit) {
+  //     // axios
+  //     console.log(toEnglish());
+  //     api.post('/salepost', toEnglish()).then(() => {
+  //       setTimeout(() => {
+  //         swal('Guardado', 'Registro Exitoso', 'success');
+  //         history.push('/autos-publicados');
+  //       }, 500);
+  //     });
+  //   }
+  // }, [second]);
 
   const validate = (values) => {
     const errors = {};
@@ -154,9 +183,9 @@ const CarRegister = () => {
     if (!values.region) {
       errors.region = 'Es obligatorio ingresar región';
     }
-    if (!values.photos) {
-      errors.photos = 'Es obligatorio ingresar link de photo';
-    }
+    // if (!values.photos) {
+    //   errors.photos = 'Es obligatorio ingresar link de photo';
+    // }
     if (!values.descripcion) {
       errors.descripcion = 'Es obligatorio ingresar descripción';
     } else if (values.descripcion.length < 10) {
@@ -171,7 +200,7 @@ const CarRegister = () => {
       <div className="carRegister__Publish">
         <h2>Datos del Vehículo</h2>
         <div className="UserContact__line"></div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} encType='multipart/form-data'>
           <div className="carRegister__Inputs">
             <div className="FormRegister__divHigh">
               <select
@@ -396,13 +425,14 @@ const CarRegister = () => {
               <label><i className='fa fa-plus'></i></label>
               {/* <AddBoxIcon/> */}
               <input
-                value={newDataForm.photos}
-                onChange={handleChange}
+                // value={newDataForm.photos}
+                onChange={handlePhoto}
                 name="photos"
                 id="photos"
-                type="text"
+                type="file"
                 placeholder="Link de photo"
                 autoComplete="off"
+                multiple
               />
               <p>{formErrors.photos}</p>
             </div>

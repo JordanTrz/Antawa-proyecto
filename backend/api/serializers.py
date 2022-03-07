@@ -1,6 +1,10 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from .models import *
+
+from .forms import *
+from cloudinary.forms import cl_init_js_callbacks
+
 class ModelSerializer(serializers.ModelSerializer):
   class Meta:
     model = Model
@@ -58,8 +62,10 @@ class SalePostSerializer(serializers.ModelSerializer):
     salepost = SalePost.objects.create(**validated_data)
     print(salepost)
     for photo in photos:
-      Photo.objects.create(**photo, salePost_id=salepost)
+        Photo.objects.create(**photo, salePost_id=salepost)
+        print("photos cloudinary", photo)
     return salepost
+
 
   # def update(self,instance,validated_data):
   #   instance.salePost_description = validated_data('salePost_description', instance.salePost_description)
