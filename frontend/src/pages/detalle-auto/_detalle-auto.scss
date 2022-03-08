@@ -74,14 +74,19 @@ form{
       }
 
       &__imagen img{
-          width: 100%;
+          width: 90%;
           height: 500px;
           border-radius: 15px;
           object-fit: cover;
+          margin: auto;
       }
   }
 
   &__frm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
       &__filtro{
           display: flex;
@@ -92,7 +97,7 @@ form{
 
       &__card{
           background-color: #fff;
-          width: 100%;
+          width: 80%;
           padding: 15px 10px 20px 10px;
           border-radius: 7px;
       }

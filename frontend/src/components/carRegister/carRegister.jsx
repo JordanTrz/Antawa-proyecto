@@ -34,7 +34,6 @@ const CarRegister = () => {
     idVendedor: userData.id,
   };
   const [newDataForm, setNewDataForm] = useState(initialStateValues);
-  const [isSubmit, setIsSubmit] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [allBackData, setAllBackData] = useState({
     make: '',
@@ -67,8 +66,7 @@ const CarRegister = () => {
   }, []);
 
   const handlePhoto = (e) =>{
-    setToPhoto(e.target.files)
-    console.log(e.target.files)
+    setToPhoto(e.target.files);
   }
 
   const handleChange = (e) => {
@@ -93,54 +91,49 @@ const CarRegister = () => {
       fuel_id: parseInt(newDataForm.combustible),
       region_id: parseInt(newDataForm.region),
       salePost_description: newDataForm.descripcion,
-      photos: [
-        {
-          photo_url: newDataForm.photos,
-          // photo_cloudinary: newDataForm.photos
-        },
-      ],
+      photos: newDataForm.photos,
     };
     setToBack(toBack);
     return toBack;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    setFormErrors(validate(newDataForm))
     setFirst(true);
   };
 
   useEffect(()=>{
-    const formData = new FormData()
-    formData.append("file",toPhoto)
-    formData.append("upload_preset","yvlnujk1")
-
-    const sentFinal = async () => {await axios
-     .post("https://api.cloudinary.com/v1_1/dlhsturyl/image/upload",formData)
-     .then(res => {
-       console.log(res);
-       setNewDataForm({...newDataForm, "photos" :res.data.url})
-       setIsSubmit(true);
-      //  toEnglish();
-       setFormErrors(validate(newDataForm));
-       setSecond(true);
-       setIsSubmit(true);
-      })
+    const photos_links = [];
+    if(first && Object.keys(formErrors).length == 0){
+      const SendData = () =>{
+        Object.values(toPhoto).map(photo=>{
+          const formData = new FormData();
+          formData.append("file",photo);
+          formData.append("upload_preset","yvlnujk1");
+          axios
+            .post("https://api.cloudinary.com/v1_1/dlhsturyl/image/upload",formData)
+            .then(res => {
+                photos_links.push({photo_url:res.data.url});
+                if (photos_links.length == Object.keys(toPhoto).length){
+                  setNewDataForm({...newDataForm,"photos":photos_links})
+                  setSecond(true)
+                }
+          })
+        })
+      }
+      SendData();
     }
-    sentFinal();
   },[first])
 
-  // useEffect(() => {
-  //   if (Object.keys(formErrors).length === 0 && isSubmit) {
-  //     // axios
-  //     console.log(toEnglish());
-  //     api.post('/salepost', toEnglish()).then(() => {
-  //       setTimeout(() => {
-  //         swal('Guardado', 'Registro Exitoso', 'success');
-  //         history.push('/autos-publicados');
-  //       }, 500);
-  //     });
-  //   }
-  // }, [second]);
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && second) {
+      api.post('/salepost', toEnglish()).then(() => {
+        swal('Guardado', 'Registro Exitoso', 'success');
+        history.push('/autos-publicados');
+      });
+    }
+  }, [second]);
 
   const validate = (values) => {
     const errors = {};

@@ -343,20 +343,26 @@ form {
     align-items: center;
     padding: 10px; }
   .div1__slider__imagen img {
-    width: 100%;
+    width: 90%;
     height: 500px;
     border-radius: 15px;
-    object-fit: cover; }
-  .div1__frm__filtro {
+    object-fit: cover;
+    margin: auto; }
+  .div1__frm {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    padding: 10px; }
-  .div1__frm__card {
-    background-color: #fff;
-    width: 100%;
-    padding: 15px 10px 20px 10px;
-    border-radius: 7px; }
+    align-items: center; }
+    .div1__frm__filtro {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px; }
+    .div1__frm__card {
+      background-color: #fff;
+      width: 80%;
+      padding: 15px 10px 20px 10px;
+      border-radius: 7px; }
 
 .descripcion {
   background-color: #fff;
@@ -915,13 +921,13 @@ form {
     gap: 50px; }
 
 .main_buscar_auto_publish {
-  display: flex;
   justify-content: center;
   gap: 20px;
   padding: 30px;
-  height: 100%;
   background: linear-gradient(63.29deg, rgba(38, 70, 83, 0.37) 0%, rgba(233, 196, 106, 0.6) 100.34%, rgba(255, 255, 255, 0) 100.35%);
-  flex-direction: column; }
+  flex-direction: column;
+  height: calc(100vh - 70px);
+  box-sizing: border-box; }
   .main_buscar_auto_publish > div:last-child {
     text-align: center; }
   .main_buscar_auto_publish .btnPublicarCars button {
