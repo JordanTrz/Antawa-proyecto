@@ -1,5 +1,6 @@
 frontend/node_modules/
 backend/venv/
 backend/.env
+backend/aws/
 
 build/
