@@ -2,6 +2,7 @@
 import Slider from 'react-slick';
 import React, { Component } from 'react';
 import axios from 'axios';
+import { api } from '../../api/api';
 import 'boxicons';
 import 'glider-js';
 import { useEffect, useState } from 'react';
@@ -13,8 +14,10 @@ const DetAuto = (props) => {
   const { match } = props;
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/salepost/${match.params.idcard}`)
+    api
+      .get(`/salepost/${match.params.idcard}`)
+    // api
+    //   .get(`${match.params.idcard}`)
       .then((res) => {
         setOferta(res.data.content);
         setStatus(true);

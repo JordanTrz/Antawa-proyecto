@@ -16,6 +16,7 @@ import FirstCarPublish from "./pages/autos-publicados/first-publish";
 import ContactForm from "./pages/usados/index";
 import PublshCar from './pages/publicar-auto';
 import UserUpdate from "./pages/userUpdate";
+import ModificarAuto from "./pages/modificar-auto/ModificarAuto";
 
 import { store, persistor } from "./store/";
 // import { useSelector } from "react-redux";
@@ -40,6 +41,7 @@ function App() {
               <Route exact path="/autos-publicados" component={CarsPublished} />
               <Route exact path="/primera-publicacion" component={FirstCarPublish} />
               <Route exact path="/user-update" component={UserUpdate} />
+              <Route exact path="/modificar-auto/:idcar" component={ModificarAuto} />
             </Switch>
           </Router>
         </PersistGate>

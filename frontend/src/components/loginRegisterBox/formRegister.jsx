@@ -6,12 +6,13 @@ import axios from 'axios';
 import { URL_BACKEND } from "../../api/environment";
 import { useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
+import { api } from "../../api/api";
 
 function FormRegister(){
 
-  // const url = 'http://localhost:5000/vendedores';
   const url = `${URL_BACKEND}/user`
-  const url_create = 'http://127.0.0.1:8000/user';
+  // const url_create = 'http://127.0.0.1:8000/user';
+  const url_create = 'http://34.238.235.4:8000/user';
   // const pageHome = '/';
   const initialValues = { nombre:"", apellido:"", email:"", contrasena:"", dni:"", celular:"" };
   const [formValues, setFormValues] = useState(initialValues);
@@ -47,9 +48,11 @@ function FormRegister(){
 
       console.log(alldata)
 
-      await axios
-      .post(url_create,
-      // URL_BACKEND.post('/user',
+      // await axios
+      // api
+      // .post('/user',
+      await URL_BACKEND
+      .post('/user',
         alldata
         )
       .then(() => {

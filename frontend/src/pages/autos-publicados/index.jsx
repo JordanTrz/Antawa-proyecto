@@ -11,6 +11,21 @@ const CarsPublished = () => {
   const dispatch = useDispatch();
   const userID = useSelector((state) => state.auth.userData.id)
   const [carPublished,setCarPublished] = useState([]);
+  const [updateCar,setUpdateCar] = useState([])
+
+  const handleUpdate = (id) => {
+    const getDataPost = async () => {
+      await api
+        .get(`/salepost/${id}`)
+        .then(res => {
+          console.log(res);
+          setUpdateCar(res.data.content);
+        })
+    }
+    getDataPost();
+  }
+
+
 
   const dataCarsPublished = async ()=>{
     await api
@@ -39,12 +54,15 @@ const CarsPublished = () => {
     dataCarsPublished();
   }
 
+  // const idcar = `/modificar-auto/${}`
+
   return(
     <div className="main_buscar_auto_publish">
       <div className="publishCar__wrapper">
         {carPublished && carPublished.length == 0 ? '' : carPublished.map((e,i)=>{
           return(
-          <div className="publishCar__data">
+        // <Link />
+          <div onClick={()=>handleUpdate(e.salePost_id)} className="publishCar__data">
             <h1>Publicación #{i+1}</h1>
             <div>
               <div>
