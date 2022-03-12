@@ -6,6 +6,7 @@ import axios from 'axios';
 import { URL_BACKEND } from "../../api/environment";
 import { useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
+import swal2 from 'sweetalert2';
 import { api } from "../../api/api";
 
 function FormRegister(){
@@ -31,7 +32,7 @@ function FormRegister(){
     setFormErrors(validate(formValues));
   }
 
-  useEffect( async () => {
+  useEffect(() => {
     if(Object.keys(formErrors).length === 0 && isSubmit){
 
       const alldata = {
@@ -49,19 +50,19 @@ function FormRegister(){
       console.log(alldata)
 
       // await axios
-      // api
-      // .post('/user',
-      await URL_BACKEND
+      api
       .post('/user',
+    // URL_BACKEND
+    //   .post('/user',
         alldata
         )
       .then(() => {
         console.log("Enviado a la base de datos");
-      })
-      swal("Correcto", "Registro exitoso", "success");
-      // setTimeout(() => {
+        // swal("Correcto", "Registro exitoso", "success");
+        swal2.fire("Correcto", "Registro exitoso", "success")
+
         history.push('/login');
-      // }, 1000);
+      })
     }
 
   },[formErrors])

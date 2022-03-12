@@ -1,4 +1,6 @@
-import React, { useEffect, Fragment, useState } from "react";
+import React, { Fragment } from "react";
+// import { useEffect } from "react";
+// import { useState } from "react";
 
 const Marc = (props) => {
   //   const urlMarca = "http://localhost:5000/marcas";

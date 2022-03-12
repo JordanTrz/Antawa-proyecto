@@ -1,3 +1,5 @@
+from calendar import c
+import enum
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from .models import *
@@ -66,59 +68,52 @@ class SalePostSerializer(serializers.ModelSerializer):
         print("photos cloudinary", photo)
     return salepost
 
+  def update(self,instance,validated_data):
+    instance.salePost_description = validated_data.get('salePost_description', instance.salePost_description)
+    instance.salePost_yearModel = validated_data.get('salePost_yearModel', instance.salePost_yearModel)
+    instance.salePost_yearManufacturing = validated_data.get('salePost_yearManufacturing', instance.salePost_yearManufacturing)
+    instance.salePost_kilometer = validated_data.get('salePost_kilometer', instance.salePost_kilometer)
+    instance.salePost_cylinder = validated_data.get('salePost_cylinder', instance.salePost_cylinder)
+    instance.salePost_door = validated_data.get('salePost_door', instance.salePost_door)
+    instance.salePost_color = validated_data.get('salePost_color', instance.salePost_color)
+    instance.salePost_price = validated_data.get('salePost_price', instance.salePost_price)
+    instance.model_id = validated_data.get('model_id', instance.model_id)
+    instance.category_id = validated_data.get('category_id', instance.category_id)
+    instance.transmission_id = validated_data.get('transmission_id', instance.transmission_id)
+    instance.fuel_id = validated_data.get('fuel_id', instance.fuel_id)
+    instance.region_id = validated_data.get('region_id', instance.region_id)
+    instance.save()
+    photos = validated_data.pop('photos')
+    keep_photos = []
+    # existing_photos = [p.photo_id for p in instance.photos]
 
-  # def update(self,instance,validated_data):
-  #   instance.salePost_description = validated_data('salePost_description', instance.salePost_description)
-  #   instance.salePost_yearModel = validated_data('salePost_yearModel', instance.salePost_yearModel)
-  #   instance.salePost_yearManufacturing = validated_data('salePost_yearManufacturing', instance.salePost_yearManufacturing)
-  #   instance.salePost_kilometer = validated_data('salePost_kilometer', instance.salePost_kilometer)
-  #   instance.salePost_cylinder = validated_data('salePost_cylinder', instance.salePost_cylinder)
-  #   instance.salePost_door = validated_data('salePost_door', instance.salePost_door)
-  #   instance.salePost_color = validated_data('salePost_color', instance.salePost_color)
-  #   instance.salePost_price = validated_data('salePost_price', instance.salePost_price)
-  #   new_model = Model.objects.get()
-  #   n_model = validated_data.pop('model')
-  #   n_make = validated_data.pop('model')
-  #   n_transmission = validated_data.pop('model')
-  #   n_fuel = validated_data.pop('model')
-  #   n_region = validated_data.pop('model')
+    for photo in photos:
+      if "photo_id" in photo.keys():
+        print("sí existe")
+        if Photo.objects.filter(pk=photo["photo_id"]).exists():
+          p = Photo.objects.get(pk=photo["photo_id"])
+          print(p)
+          p.photo_url = photo.get('photo_url', p.photo_url)
+          p.save()
+          keep_photos.append(p.photo_id)
+          print(keep_photos)
+        else:
+          continue
+      else:
+        print("no tiene id")
+        p = Photo.objects.create(**photo,salePost_id=instance)
+        keep_photos.append(p.photo_id)
+        print(keep_photos)
 
+    print(photo)
 
-  #   instance.model_type = validated_data('model_type', instance.model_type)
-  #   instance.make_type = validated_data('make_type', instance.make_type)
-  #   instance.category_type = validated_data('category_type', instance.category_type)
-  #   instance.transmission_type = validated_data('transmission_type', instance.transmission_type)
-  #   instance.fuel_type = validated_data('fuel_type', instance.fuel_type)
-  #   instance.region_type = validated_data('region_type', instance.region_type)
+    for photo in instance.photos.values():
+      print(photo["photo_id"])
+      if photo["photo_id"] not in keep_photos:
+        pp = Photo.objects.get(pk=photo["photo_id"])
+        pp.delete()
 
-
-
-  # def update(self,instance,validated_data):
-  #   photos = validated_data.pop('photos')
-  #   # salepost = SalePost.objects.create(**validated_data)
-  #   instance.salePost_color = validated_data.get("salePost_color",instance.salePost_color)
-  #   instance.save()
-  #   keep_photos = []
-  #   # existing_ids = [p.photo_id for p in instance.photos]
-  #   for photo in photos:
-  #     if "photo_id" in photo.keys():
-  #       if Photo.objects.filter(pk=photo["photo_id"]).exists():
-  #         p = Photo.objects.get(pk=photo["photo_id"])
-  #         p.save()
-  #         keep_photos.append(p.photo_id)
-  #       else:
-  #         continue
-  #     else:
-  #       p = Photo.objects.create(**photo, salePost_id=instance)
-  #       keep_photos.append(p.photo_id)
-
-  #   # for photo in instance.photos:
-  #   #   if photo.photo_id not in keep_photos:
-  #   #       photo.delete()
-  #   print("viendo el instance")
-  #   print(instance)
-  #   return instance
-
+    return instance
 class ExtentUserSerializer(serializers.ModelSerializer):
   # user_id = serializers.IntegerField(required=False)
   class Meta:

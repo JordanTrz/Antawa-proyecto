@@ -48,7 +48,7 @@ const BcrAuto = () => {
     setDataSearch(alldata);
   }
 
-  console.log(dataSearch)
+  // console.log(dataSearch)
 
   const onSubmit = (e) => {
     e.preventDefault();

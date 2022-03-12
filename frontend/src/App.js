@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Provider, useSelector } from "react-redux";
+import { Provider} from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 import "./sass/App.css";
@@ -28,7 +28,6 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
           <Router>
             <Navbar />
-
             <Switch>
               <Route exact path="/" component={Home} />
               {/* <Route exact path="/ANTAWA" component={Home} /> */}
@@ -37,10 +36,10 @@ function App() {
               <Route exact path="/contactform" component={ContactForm} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
+              <Route exact path="/user-update" component={UserUpdate} />
               <Route exact path="/publicar-auto" component={PublshCar} />
               <Route exact path="/autos-publicados" component={CarsPublished} />
               <Route exact path="/primera-publicacion" component={FirstCarPublish} />
-              <Route exact path="/user-update" component={UserUpdate} />
               <Route exact path="/modificar-auto/:idcar" component={ModificarAuto} />
             </Switch>
           </Router>

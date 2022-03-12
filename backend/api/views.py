@@ -101,7 +101,7 @@ class SalePostView(APIView):
     return Response(context)
 
 class SalePostDetailView(APIView):
-  # permission_classes = (IsAuthenticated,)
+  permission_classes = (IsAuthenticated,)
   def get(self,request,sale_id):
     dataSalePost = SalePost.objects.get(pk=sale_id)
     serSalePost = SalePostSerializer(dataSalePost)
@@ -179,7 +179,7 @@ class UserView(APIView):
       return Response(serUser.errors,status=status.HTTP_400_BAD_REQUEST)
 
 class UserDetailView(APIView):
-  # permission_classes = (IsAuthenticated,)
+  permission_classes = (IsAuthenticated,)
   def get(self,request,user_id):
     dataUser = User.objects.get(pk=user_id)
     serUser = UserSerializer(dataUser)
@@ -211,7 +211,7 @@ class UserDetailView(APIView):
     return Response(context)
 
 class ExtentUserView(APIView):
-  # permission_classes = (IsAuthenticated,)
+  permission_classes = (IsAuthenticated,)
   def get(self,request):
     dataExtentUser = ExtentUser.objects.all()
     serExtentUser = ExtentUserSerializer(dataExtentUser,many=True)
@@ -232,7 +232,7 @@ class ExtentUserView(APIView):
     return Response(context)
 
 class PhotoView(APIView):
-  # permission_classes = (IsAuthenticated,)
+  permission_classes = (IsAuthenticated,)
   def get(self,request):
     dataPhoto = Photo.objects.all()
     serPhoto = PhotoSerializer(dataPhoto,many=True)

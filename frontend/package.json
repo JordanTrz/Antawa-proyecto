@@ -2,7 +2,6 @@
   "name": "antawa",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://JordanTrz.github.io/Antawa-proyecto",
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
@@ -28,6 +27,7 @@
     "redux-persist": "^6.0.0",
     "styled-components": "^5.3.3",
     "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.4.4",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

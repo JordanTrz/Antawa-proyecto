@@ -3,13 +3,14 @@ import { useEffect } from 'react';
 import { api } from '../../api/api';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import swal from 'sweetalert';
-
-import AddBoxIcon from '@mui/icons-material/AddBox';
+import swal2 from 'sweetalert2';
+// import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const CarRegister = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const history = useHistory();
   const userData = useSelector((state) => {
     return state.auth.userData;
@@ -129,7 +130,8 @@ const CarRegister = () => {
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && second) {
       api.post('/salepost', toEnglish()).then(() => {
-        swal('Guardado', 'Registro Exitoso', 'success');
+        // swal('Guardado', 'Registro Exitoso', 'success');
+        swal2.fire("Guardado", "Registro exitoso", "success")
         history.push('/autos-publicados');
       });
     }

@@ -785,7 +785,7 @@ form {
     padding: 15px;
     color: #fff;
     border-radius: 0 0 10px 10px;
-    height: 350px; }
+    height: 300px; }
     .container__card__titulo {
       display: flex;
       align-items: center;
@@ -902,12 +902,13 @@ form {
   .publishCar__data h1 {
     margin-left: 30px;
     font-size: 24px; }
-  .publishCar__data > div {
+  .publishCar__data .data__wrapper {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    text-align: center; }
-    .publishCar__data > div > div h2:last-child {
+    text-align: center;
+    color: #264653; }
+    .publishCar__data .data__wrapper > div h2:last-child {
       color: white;
       font-size: 18px;
       margin-top: 10px; }

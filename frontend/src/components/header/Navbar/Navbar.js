@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+// import { useEffect } from "react";
 import { NavLink as Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -23,6 +24,8 @@ import {
 import { IconContext } from "react-icons";
 import logo from '../../../img/logo.svg';
 import 'boxicons';
+import swal from "sweetalert";
+import swal2 from 'sweetalert2';
 
 //Importando logo
 const Logo = () => <Link exact to="/"><img src={logo} alt=""/></Link>
@@ -46,7 +49,9 @@ const Navbar = () => {
     dispatch({
       type: "SET_PUBLISH_CARS",
       payload: [],
-    })
+    });
+    // swal("Sesión Cerrada", "Hasta luego", "success");
+    swal2.fire("Sesión Cerrada", "Hasta luego", "success")
   }
 
   return (

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import swal from 'sweetalert';
+import swal2 from 'sweetalert2';
 
 function FormLogin(){
   const initialFormValues = {email:"", password:""};
@@ -61,21 +62,23 @@ function FormLogin(){
       URL_BACKEND
         .post('/user/login',{
           username:e.target.email.value, password:e.target.password.value
+        })
+        .then(response=>{
+            let token = response.data.access;
+            URL_BACKEND.defaults.headers['Authorization'] = 'Bearer ' + token;
+            localStorage.setItem('access_token', token)
+            let payload = token.split('.')[1];
+            let payloadDecoded = atob(payload)
+            let payloadJSON = JSON.parse(payloadDecoded);
+            handleGet(payloadJSON)
+            // swal("Bienvenido", "Contraseña correcta", "success");
+            swal2.fire("Bienvenido", "Contraseña correcta", "success")
+            history.push('/');
+        })
+        .catch(res=>{
+          // swal("Error", "Cuenta o contraseña incorrecta", "error");
+          swal2.fire("Error", "Cuenta o contraseña incorrecta", "error")
         });
-    if (response.status === 200){
-      let token = response.data.access;
-      URL_BACKEND.defaults.headers['Authorization'] = 'Bearer ' + token;
-      localStorage.setItem('access_token', token)
-      let payload = token.split('.')[1];
-      let payloadDecoded = atob(payload)
-      let payloadJSON = JSON.parse(payloadDecoded);
-      handleGet(payloadJSON)
-      swal("Bienvenido", "Contraseña correcta", "success");
-      history.push('/');
-    }
-    else{
-      swal("Error", "Contraseña incorrecta", "error");
-    }
   }
 
   // -----------------------------------------

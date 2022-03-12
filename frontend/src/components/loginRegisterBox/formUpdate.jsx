@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { api } from '../../api/api';
 import { useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
+import swal2 from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { URL_BACKEND } from '../../api/environment';
 
@@ -62,20 +63,37 @@ function FormUpdate() {
   };
 
   const handleDelete = () => {
-    api
-      .delete(`/user/${FirtsInitialValues.id}`)
-      // .then((res) => console.log(res))
-      .then(() => {
-        dispatch({
-          type: 'SET_USER',
-          payload: {},
-        });
-        dispatch({
-          type: 'SET_LOGIN',
-          payload: false,
-        });
-      })
-      .then(() => history.push('/register'));
+
+    swal2.fire({
+      title: 'Confirmación',
+      text: "¿Realmente desea eliminar la cuenta?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2a9d8f',
+      cancelButtonColor: '#e76f51',
+      confirmButtonText: 'Sí, Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swal2.fire(
+          'Eliminado!',
+          'Tu cuenta ha sido eliminada',
+          'success'
+        );
+        api
+          .delete(`/user/${FirtsInitialValues.id}`)
+          .then(() => {
+            dispatch({
+              type: 'SET_USER',
+              payload: {},
+            });
+            dispatch({
+              type: 'SET_LOGIN',
+              payload: false,
+            });
+          })
+          .then(() => history.push('/register'));
+          }
+    })
   };
 
   useEffect(() => {
@@ -99,7 +117,8 @@ function FormUpdate() {
             }
           })
         });
-      swal('Correcto', 'Registro exitoso', 'success');
+      // swal('Correcto', 'Registro exitoso', 'success');
+      swal2.fire("Correcto", "Registro exitoso", "success");
       history.push('/');
     }
     sendUpdate();

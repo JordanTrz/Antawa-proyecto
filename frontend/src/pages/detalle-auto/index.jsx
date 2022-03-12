@@ -33,8 +33,6 @@ const DetAuto = (props) => {
     slidesToScroll: 1,
   };
 
-  console.log(oferta.photos)
-
   return (
     <div>
       <div>
