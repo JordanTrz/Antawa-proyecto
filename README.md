@@ -1,6 +1,22 @@
 # Antawa-proyecto
 
-Proyecto final para bootcamp CodiGO
+Es un página web para publicar y vender autos de segunda mano. Esta idea nació a partir de que, a raíz de la pandemia, se vio un aumento significativo en la compra de vehículos para transporte privado, ya que las familias querían evitar el contagio en los trasportes públicos. El Frontend se realizó en React y el backend en Django.
+
+## Registro
+
+![image](https://res.cloudinary.com/dlhsturyl/image/upload/v1648669511/portfolio_photos/GIF/antawa/antawa_registro_x1i74c.gif)
+
+## Catálogo y Filtrado de autos
+
+![image](https://res.cloudinary.com/dlhsturyl/image/upload/v1648669514/portfolio_photos/GIF/antawa/antawa_catalogo_cng6nq.gif)
+
+![image](https://res.cloudinary.com/dlhsturyl/image/upload/v1648669513/portfolio_photos/GIF/antawa/antawa_filtrado_vnihzb.gif)
+
+# Publicación y actualización de autos
+
+![image](https://res.cloudinary.com/dlhsturyl/image/upload/v1648669511/portfolio_photos/GIF/antawa/antawa_publicacion_owq4ip.gif)
+
+![image](https://res.cloudinary.com/dlhsturyl/image/upload/v1648669512/portfolio_photos/GIF/antawa/antawa_actualizacion_umdrcu.gif)
 
 ## Frontend
 Se trabajó con REACT.
