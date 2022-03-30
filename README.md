@@ -10,7 +10,7 @@ Es un página web para publicar y vender autos de segunda mano. Esta idea nació
 
 ![image](https://res.cloudinary.com/dlhsturyl/image/upload/v1648669514/portfolio_photos/GIF/antawa/antawa_catalogo_cng6nq.gif)
 
-![image](https://res.cloudinary.com/dlhsturyl/image/upload/v1648669513/portfolio_photos/GIF/antawa/antawa_filtrado_vnihzb.gif)
+<!-- ![image](https://res.cloudinary.com/dlhsturyl/image/upload/v1648669513/portfolio_photos/GIF/antawa/antawa_filtrado_vnihzb.gif) -->
 
 # Publicación y actualización de autos
 
